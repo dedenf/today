@@ -3,17 +3,39 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://example.org/categories/</loc>
+    <loc>https://today.dedenf.com/posts/2018-10-19-publish-dengan-netlify/</loc>
+    <lastmod>2018-10-18T13:41:48+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://today.dedenf.com/posts/setup-today-blog-dengan-hugo/</loc>
+    <lastmod>2018-10-17T17:41:48+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://today.dedenf.com/posts/2018-10-16-today-i-did-and-learn/</loc>
+    <lastmod>2018-10-17T00:35:47+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://today.dedenf.com/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/</loc>
+    <loc>https://today.dedenf.com/posts/</loc>
+    <lastmod>2018-10-18T13:41:48+07:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://example.org/tags/</loc>
+    <loc>https://today.dedenf.com/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://today.dedenf.com/</loc>
+    <lastmod>2018-10-18T13:41:48+07:00</lastmod>
     <priority>0</priority>
   </url>
   
