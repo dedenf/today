@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <generator uri="http://jekyllrb.com" version="3.8.5">Jekyll</generator>
+  
+  
+  <link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" />
+  <updated>2019-09-25T01:41:32-07:00</updated>
+  <id>http://localhost:4000//</id>
+
+  
+    <title type="html">Today i did and learn ..</title>
+  
+
+  
+    <subtitle>i did and learn things</subtitle>
+  
+
+  
+    <author>
+        <name>Deden Fathurahman</name>
+      
+      
+    </author>
+  
+
+  
+  
+    <entry>
+      
+      <title type="html">Ansible dasar</title>
+      
+      
+      <link href="http://localhost:4000/posts/2018-10-22-ansible-dasar/" rel="alternate" type="text/html" title="Ansible dasar" />
+      
+      <published>2018-10-22T21:43:18-07:00</published>
+      <updated>2018-10-22T21:43:18-07:00</updated>
+      <id>http://localhost:4000/posts/ansible-dasar</id>
+      <content type="html" xml:base="http://localhost:4000/posts/2018-10-22-ansible-dasar/">&lt;p&gt;Belajar menggunakan &lt;a href=&quot;https://ansible.com/&quot;&gt;Ansible&lt;/a&gt; untuk mengatur mesin remote atau untuk provisioning.&lt;/p&gt;
+
+&lt;h3&gt;Install&lt;/h3&gt;
+&lt;p&gt;Untuk macOS, bisa langsung pakai homebrew untuk instalasi&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ansible
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Jika sukses di-instal, kita test dengan perintah&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ansible &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
+ansible 2.7.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;!--more--&gt;
+
+&lt;h3&gt;Konfigurasi&lt;/h3&gt;
+&lt;p&gt;Untuk contoh sederhana ini, kita buat dengan menuliskan konfigurasi file yang berisi &lt;em&gt;host&lt;/em&gt; target yang akan kita &lt;em&gt;provisioning&lt;/em&gt;, di dalam folder project kita,&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;hosts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Kemudian &lt;code class=&quot;highlighter-rouge&quot;&gt;vi hosts&lt;/code&gt; dan masukkan daftar &lt;em&gt;host&lt;/em&gt; yang akan digunakan, di sini menggunakan host yang telah saya buat sebelumnya di &lt;a href=&quot;https://m.do.co/c/714b3c32b2e7&quot;&gt;digitalocean&lt;/a&gt;, menggunakan Terraform (!TODO nulis), contoh.&lt;/p&gt;
+
+&lt;div class=&quot;language-ini highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;[webserver]&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;123.123.123.123&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Kemudian tiba dihal yang penting, membuat ansible playbook, playbook memiliki format &lt;code class=&quot;highlighter-rouge&quot;&gt;.yml&lt;/code&gt; yang mana lebih mudah dimengerti daripada &lt;code class=&quot;highlighter-rouge&quot;&gt;json&lt;/code&gt; atau format lainnya, &lt;code class=&quot;highlighter-rouge&quot;&gt;xml&lt;/code&gt; misalkan.&lt;/p&gt;
+
+&lt;h4&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;site.yml&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;Kita buat file tersebut&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vim site.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Untuk isinya, saya coba tulis yang sederhana terlebih dahulu.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-YAML&quot;&gt;---
+- name: Install web server
+  hosts: all
+  remote_user: root
+
+  tasks:
+    - name: Install mariadb server
+      apt:
+        name: mariadb-server
+      register: mariadbinstall
+    - name: Uninstall maradb server
+      apt:
+        name: mariadb-server
+        state: absent
+       register: mariadbuninstall
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Save file, kemudian jalankan perintah&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ansible-playbook &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; hosts site.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dan seharusnya akan keluar &lt;code class=&quot;highlighter-rouge&quot;&gt;stdout&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;PLAY &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Install web server] &lt;span class=&quot;k&quot;&gt;*****************************************************************************************&lt;/span&gt;
+
+TASK &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Gathering Facts] &lt;span class=&quot;k&quot;&gt;*****************************************************************************************&lt;/span&gt;ok: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;128.199.76.43]
+
+TASK &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;mysql-server] &lt;span class=&quot;k&quot;&gt;*****************************************************************************************&lt;/span&gt;ok: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;128.199.76.43]
+
+TASK &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;uninstall mysql-server 1.0] &lt;span class=&quot;k&quot;&gt;*****************************************************************************************&lt;/span&gt;ok: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;128.199.76.43]
+
+PLAY RECAP &lt;span class=&quot;k&quot;&gt;*****************************************************************************************&lt;/span&gt;128.199.76.43              : &lt;span class=&quot;nv&quot;&gt;ok&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3    &lt;span class=&quot;nv&quot;&gt;changed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0    &lt;span class=&quot;nv&quot;&gt;unreachable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0    &lt;span class=&quot;nv&quot;&gt;failed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dan kita sudah belajar melakukan provisioning dengan menggunakan Ansible!&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Deden Fathurahman</name>
+          
+          
+        </author>
+      
+
+      
+
+      
+        <category term="development" />
+      
+        <category term="ansible" />
+      
+        <category term="computer" />
+      
+
+      
+        <summary type="html">Belajar menggunakan Ansible untuk mengatur mesin remote atau untuk provisioning. Install Untuk macOS, bisa langsung pakai homebrew untuk instalasi $ brew install ansible Jika sukses di-instal, kita test dengan perintah $ ansible --version ansible 2.7.0</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Membuat roti</title>
+      
+      
+      <link href="http://localhost:4000/posts/2018-10-18-membuat-roti/" rel="alternate" type="text/html" title="Membuat roti" />
+      
+      <published>2018-10-18T23:41:48-07:00</published>
+      <updated>2018-10-18T23:41:48-07:00</updated>
+      <id>http://localhost:4000/posts/membuat-roti</id>
+      <content type="html" xml:base="http://localhost:4000/posts/2018-10-18-membuat-roti/">&lt;p&gt;Hari ini, tepatnya tadi pagi melihat &lt;a href=&quot;https://www.youtube.com/watch?v=EGbNI26PPYg&quot;&gt;bagaimana orang-orang membuat roti&lt;/a&gt;, perbedaan cara buat roti dari perancis, finlandia, dan juga &lt;a href=&quot;https://www.youtube.com/watch?v=2FVfJTGpXnU&quot;&gt;roti sourdough&lt;/a&gt; dan juga kultur roti, sepertinya mudah, nanti akan dicoba membuatnya.&lt;/p&gt;
+
+&lt;iframe width=&quot;660&quot; height=&quot;415&quot; src=&quot;https://www.youtube.com/embed/2FVfJTGpXnU&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;dan &lt;a href=&quot;https://www.youtube.com/watch?v=fskZ3S9zFnU&quot;&gt;sourdough battle&lt;/a&gt;.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Deden Fathurahman</name>
+          
+          
+        </author>
+      
+
+      
+
+      
+        <category term="masak" />
+      
+        <category term="roti" />
+      
+
+      
+        <summary type="html">Hari ini, tepatnya tadi pagi melihat bagaimana orang-orang membuat roti, perbedaan cara buat roti dari perancis, finlandia, dan juga roti sourdough dan juga kultur roti, sepertinya mudah, nanti akan dicoba membuatnya. dan sourdough battle.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Publish Hugo dengan Netlify</title>
+      
+      
+      <link href="http://localhost:4000/posts/2018-10-17-publish-dengan-netlify/" rel="alternate" type="text/html" title="Publish Hugo dengan Netlify" />
+      
+      <published>2018-10-17T23:41:48-07:00</published>
+      <updated>2018-10-17T23:41:48-07:00</updated>
+      <id>http://localhost:4000/posts/publish-dengan-netlify</id>
+      <content type="html" xml:base="http://localhost:4000/posts/2018-10-17-publish-dengan-netlify/">&lt;p&gt;Sebelumnya saya &lt;a href=&quot;https://today.dedenf.com/posts/2018-10-17-setup-today-blog-dengan-hugo/&quot;&gt;menulis tentang Hugo&lt;/a&gt;, mesin blog yang saya gunakan untuk &lt;strong&gt;blog today&lt;/strong&gt; ini, dan untuk mendeploy-nya di internet, menggunakan &lt;a href=&quot;https://netlify.com&quot;&gt;Netlify&lt;/a&gt;, selain gratis (ada opsi bayar untuk fitur yang lebih &lt;em&gt;advance&lt;/em&gt;), untuk &lt;em&gt;tier&lt;/em&gt; gratisannya lumayan cukup untuk mengakomodasi kebutuhan &lt;em&gt;publishing&lt;/em&gt;.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Untuk memulai, pastikan sudah mendaftar di netlify, disarankan juga untuk meng-&lt;em&gt;host&lt;/em&gt; domain di netlify, jika tidak juga tidak apa-apa, bisa dilakukan registrasi di record CNAME nantinya, &lt;a href=&quot;https://www.netlify.com/docs/custom-domains/&quot;&gt;lihat dokumentasi&lt;/a&gt; untuk lebih jelasnya.&lt;/p&gt;
+
+&lt;p&gt;Proses publikasi juga cukup mudah, mulai dengan opsi “&lt;a href=&quot;https://app.netlify.com/start&quot;&gt;New Site from Git&lt;/a&gt;”, kemudian pilih Git provider yang digunakan, saya menggunakan &lt;a href=&quot;https://github.com/dedenf/today&quot;&gt;Github&lt;/a&gt;. Dari situ proses bisa dimulai dengan memilih &lt;em&gt;repo&lt;/em&gt; yang digunakan untuk blog,&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/posts/choose-repo.png&quot; alt=&quot;pilih repo&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;dan kemudian &lt;em&gt;build!&lt;/em&gt;
+&lt;img src=&quot;/images/posts/build-site.png&quot; alt=&quot;pilih repo&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Jika belum &lt;em&gt;setup&lt;/em&gt; domain, bisa dilanjutkan dengan domain yang diinginkan untuk didaftarkan ditahap ini.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Deden Fathurahman</name>
+          
+          
+        </author>
+      
+
+      
+
+      
+        <category term="development" />
+      
+        <category term="computer" />
+      
+
+      
+        <summary type="html">Sebelumnya saya menulis tentang Hugo, mesin blog yang saya gunakan untuk blog today ini, dan untuk mendeploy-nya di internet, menggunakan Netlify, selain gratis (ada opsi bayar untuk fitur yang lebih advance), untuk tier gratisannya lumayan cukup untuk mengakomodasi kebutuhan publishing.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Setup Blog Dengan Hugo</title>
+      
+      
+      <link href="http://localhost:4000/posts/2018-10-17-setup-today-blog-dengan-hugo/" rel="alternate" type="text/html" title="Setup Blog Dengan Hugo" />
+      
+      <published>2018-10-17T03:41:48-07:00</published>
+      <updated>2018-10-17T03:41:48-07:00</updated>
+      <id>http://localhost:4000/posts/setup-today-blog-dengan-hugo</id>
+      <content type="html" xml:base="http://localhost:4000/posts/2018-10-17-setup-today-blog-dengan-hugo/">&lt;p&gt;Tidak seperti &lt;a href=&quot;https://notes.dedenf.com&quot;&gt;blog&lt;/a&gt; &lt;a href=&quot;https://jakartadev.org&quot;&gt;yang&lt;/a&gt; &lt;a href=&quot;https://jenius.tech/&quot;&gt;lainnya&lt;/a&gt; yang menggunakan &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; sebagai &lt;em&gt;blog engine&lt;/em&gt;, di blog ini menggunakan &lt;a href=&quot;https://gohugo.io/&quot;&gt;Hugo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Hugo menurut saya sangan cepat, baik dari sisi setup, maupun dalam sisi deployment.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h3&gt;Instalasi&lt;/h3&gt;
+&lt;p&gt;Instalasi sangat mudah, jika pengguna macOS, cukup menggunakan &lt;a href=&quot;https://brew.sh/&quot;&gt;homebrew&lt;/a&gt;, dan jalankan perintah&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;hugo 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;dan system yang akan mengurus semuanya, untuk system dan cara lain silakan lihat &lt;a href=&quot;https://gohugo.io/getting-started/installing/&quot;&gt;didokumentasi&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Dan kemudian bisa melakukan perintah ini untuk melihat apakah site kita jalan dengan baik&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;hugo server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Jika berjalan normal, terminal akan memperlihatkan pesan seperti ini&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;                   | EN
++------------------+----+
+  Pages            | 10
+  Paginator pages  |  0
+  Non-page files   |  0
+  Static files     |  4
+  Processed images |  0
+  Aliases          |  4
+  Sitemaps         |  1
+  Cleaned          |  0
+
+Total &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;9 ms
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Untuk melakukan kostumasi, bisa dilakukan edit file &lt;code class=&quot;highlighter-rouge&quot;&gt;config.toml&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Theme&lt;/h3&gt;
+&lt;p&gt;Untuk instalasi tema juga mudah, kebetulan saya menggunakan &lt;a href=&quot;https://github.com/nanxiaobei/hugo-paper/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;hugo-paper&lt;/code&gt;&lt;/a&gt;, cukup melakukan&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone https://github.com/nanxiaobei/hugo-paper.git themes/hugo-paper
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Setelah itu jangan lupa untuk memanggil theme tersebut di &lt;code class=&quot;highlighter-rouge&quot;&gt;config.toml&lt;/code&gt; dengan menambahkan entry&lt;/p&gt;
+&lt;div class=&quot;language-toml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;err&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;py&quot;&gt;theme&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;hugo-paper&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3&gt;Menulis entry&lt;/h3&gt;
+&lt;p&gt;Menulis entry blog pertama kali bisa dicoba dengan menggunakan perintah&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;hugo new posts/entry-pertama.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Sama seperti Jekyll, Hugo menggunakan markdown untuk formatting, setelah selesai menulis, untuk melihat hasilnya&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;hugo server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Perintah itu akan membuat server hugo aktif dan siap untuk menerima request.&lt;/p&gt;
+
+&lt;p&gt;Selanjutnya, akan dibahas mengenai deployment ke &lt;a href=&quot;https://netlify.com&quot;&gt;Netlify.com&lt;/a&gt;.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Deden Fathurahman</name>
+          
+          
+        </author>
+      
+
+      
+
+      
+        <category term="hugo" />
+      
+        <category term="development" />
+      
+        <category term="computer" />
+      
+
+      
+        <summary type="html">Tidak seperti blog yang lainnya yang menggunakan Jekyll sebagai blog engine, di blog ini menggunakan Hugo. Hugo menurut saya sangan cepat, baik dari sisi setup, maupun dalam sisi deployment.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Today I Did and Learn</title>
+      
+      
+      <link href="http://localhost:4000/posts/2018-10-16-today-i-did-and-learn/" rel="alternate" type="text/html" title="Today I Did and Learn" />
+      
+      <published>2018-10-16T10:35:47-07:00</published>
+      <updated>2018-10-16T10:35:47-07:00</updated>
+      <id>http://localhost:4000/posts/today-i-did-and-learn</id>
+      <content type="html" xml:base="http://localhost:4000/posts/2018-10-16-today-i-did-and-learn/">&lt;p&gt;Mencoba mendokumentasikan apa yang dilakuan seharian, saya mencoba membatasi yang tulis di sini adalah semua hal yang berhubungan dengan hal-hal technical, development, contohnya, menulis tentang framework baru, atau mencoba database baru, dan sebagainya.&lt;/p&gt;
+
+&lt;p&gt;Saya tetap menulis di blog lain untuk yang lebih detail, atau membutuhkan media yang mewakili, saya sendiri menulis di &lt;a href=&quot;https://jenius.tech&quot;&gt;jenius.tech&lt;/a&gt;, juga di &lt;a href=&quot;https://jakartadev.org&quot;&gt;jakartadev.org&lt;/a&gt; dan di blog pribadi, &lt;a href=&quot;https://notes.dedenf.com&quot;&gt;notes.dedenf.com&lt;/a&gt;, bedanya dengan &lt;strong&gt;today&lt;/strong&gt; adalah frekwensi dan tingkat kedalaman dari artikel yang ditulis.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h3&gt;Kenapa?&lt;/h3&gt;
+&lt;p&gt;Tujuannya agar menantang diri sendiri agar bisa membiasakan menulis, dan juga belajar hal baru atau mendalami hal yang sudah pernah dicoba. saya mencoba membatasi untuk hal yang dipelajari dalam waktu 30 - 60 menit, dalam batasan itu, apa yang bisa dipelajari.&lt;/p&gt;
+
+&lt;p&gt;Untuk artikel yang lebih mendalam, bisa mengambil ide dari &lt;strong&gt;today&lt;/strong&gt;, kemudian dikembangkan di notes atau blog lainnya.&lt;/p&gt;
+
+&lt;h3&gt;Konklusi&lt;/h3&gt;
+&lt;p&gt;Mudah-mudahan bisa konsisten dalam menulis.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Deden Fathurahman</name>
+          
+          
+        </author>
+      
+
+      
+
+      
+
+      
+        <summary type="html">Mencoba mendokumentasikan apa yang dilakuan seharian, saya mencoba membatasi yang tulis di sini adalah semua hal yang berhubungan dengan hal-hal technical, development, contohnya, menulis tentang framework baru, atau mencoba database baru, dan sebagainya. Saya tetap menulis di blog lain untuk yang lebih detail, atau membutuhkan media yang mewakili, saya sendiri menulis di jenius.tech, juga di jakartadev.org dan di blog pribadi, notes.dedenf.com, bedanya dengan today adalah frekwensi dan tingkat kedalaman dari artikel yang ditulis.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Welcome To Jekyll</title>
+      
+      
+      <link href="http://localhost:4000/posts/2017-01-05-welcome-to-jekyll/" rel="alternate" type="text/html" title="Welcome To Jekyll" />
+      
+      <published>2017-01-05T00:00:00-07:00</published>
+      <updated>2017-01-05T00:00:00-07:00</updated>
+      <id>http://localhost:4000/posts/welcome-to-jekyll</id>
+      <content type="html" xml:base="http://localhost:4000/posts/2017-01-05-welcome-to-jekyll/">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Deden Fathurahman</name>
+          
+          
+        </author>
+      
+
+      
+
+      
+
+      
+        <summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated. To add new posts, simply add a file in the _posts directory that follows the convention YYYY-MM-DD-name-of-post.ext and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works. Jekyll also offers powerful support for code snippets: def print_hi(name) puts &quot;Hi, #{name}&quot; end print_hi('Tom') #=&amp;gt; prints 'Hi, Tom' to STDOUT. Check out the Jekyll docs for more info on how to get the most out of Jekyll. File all bugs/feature requests at Jekyll’s GitHub repo. If you have questions, you can ask them on Jekyll Talk.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">This post demonstrates post content styles</title>
+      
+      
+      <link href="http://localhost:4000/posts/2017-01-04-this-post-demonstrates-post-content-styles/" rel="alternate" type="text/html" title="This post demonstrates post content styles" />
+      
+      <published>2017-01-04T00:00:00-07:00</published>
+      <updated>2017-01-04T00:00:00-07:00</updated>
+      <id>http://localhost:4000/posts/this-post-demonstrates-post-content-styles</id>
+      <content type="html" xml:base="http://localhost:4000/posts/2017-01-04-this-post-demonstrates-post-content-styles/">&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit.&lt;/p&gt;
+
+&lt;h2&gt;Some great heading (h2)&lt;/h2&gt;
+
+&lt;p&gt;Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu.&lt;/p&gt;
+
+&lt;p&gt;Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.&lt;/p&gt;
+
+&lt;h2&gt;Another great heading (h2)&lt;/h2&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit.&lt;/p&gt;
+
+&lt;h3&gt;Some great subheading (h3)&lt;/h3&gt;
+
+&lt;p&gt;Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum.&lt;/p&gt;
+
+&lt;p&gt;Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc.&lt;/p&gt;
+
+&lt;h3&gt;Some great subheading (h3)&lt;/h3&gt;
+
+&lt;p&gt;Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This quote will change your life. It will reveal the secrets of the universe, and all the wonders of humanity. Don’t misuse it.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt.&lt;/p&gt;
+
+&lt;h3&gt;Some great subheading (h3)&lt;/h3&gt;
+
+&lt;p&gt;Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Hello, World!&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.&lt;/p&gt;
+
+&lt;h4&gt;You might want a sub-subheading (h4)&lt;/h4&gt;
+
+&lt;p&gt;In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.&lt;/p&gt;
+
+&lt;p&gt;In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.&lt;/p&gt;
+
+&lt;h4&gt;But it’s probably overkill (h4)&lt;/h4&gt;
+
+&lt;p&gt;In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.&lt;/p&gt;
+
+&lt;h3&gt;Oh hai, an unordered list!!&lt;/h3&gt;
+
+&lt;p&gt;In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;First item, yo&lt;/li&gt;
+  &lt;li&gt;Second item, dawg&lt;/li&gt;
+  &lt;li&gt;Third item, what what?!&lt;/li&gt;
+  &lt;li&gt;Fourth item, fo sheezy my neezy&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Oh hai, an ordered list!!&lt;/h3&gt;
+
+&lt;p&gt;In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;First item, yo&lt;/li&gt;
+  &lt;li&gt;Second item, dawg&lt;/li&gt;
+  &lt;li&gt;Third item, what what?!&lt;/li&gt;
+  &lt;li&gt;Fourth item, fo sheezy my neezy&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;Headings are cool! (h2)&lt;/h2&gt;
+
+&lt;p&gt;Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.&lt;/p&gt;
+
+&lt;p&gt;Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.&lt;/p&gt;
+
+&lt;p&gt;Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Bart Simpson</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="junk" />
+      
+
+      
+
+      
+        <summary type="html">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Some great heading (h2) Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est. Another great heading (h2) Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Some great subheading (h3) Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Some great subheading (h3) Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est. This quote will change your life. It will reveal the secrets of the universe, and all the wonders of humanity. Don’t misuse it. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Some great subheading (h3) Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;p&amp;gt;Hello, World!&amp;lt;/p&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. You might want a sub-subheading (h4) In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. But it’s probably overkill (h4) In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Oh hai, an unordered list!! In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. First item, yo Second item, dawg Third item, what what?! Fourth item, fo sheezy my neezy Oh hai, an ordered list!! In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. First item, yo Second item, dawg Third item, what what?! Fourth item, fo sheezy my neezy Headings are cool! (h2) Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Some articles are just so long they deserve a really long title to see if things will break well</title>
+      
+      
+      <link href="http://localhost:4000/posts/2017-01-03-super-long-article/" rel="alternate" type="text/html" title="Some articles are just so long they deserve a really long title to see if things will break well" />
+      
+      <published>2017-01-03T00:00:00-07:00</published>
+      <updated>2017-01-03T00:00:00-07:00</updated>
+      <id>http://localhost:4000/posts/super-long-article</id>
+      <content type="html" xml:base="http://localhost:4000/posts/2017-01-03-super-long-article/">&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.&lt;/p&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.&lt;/p&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Deden Fathurahman</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="misc" />
+      
+
+      
+        <category term="lorem" />
+      
+        <category term="ipsum" />
+      
+
+      
+        <summary type="html">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">My Example Post</title>
+      
+      
+      <link href="http://localhost:4000/posts/2017-01-02-my-example-post/" rel="alternate" type="text/html" title="My Example Post" />
+      
+      <published>2017-01-02T00:00:00-07:00</published>
+      <updated>2017-01-02T00:00:00-07:00</updated>
+      <id>http://localhost:4000/posts/my-example-post</id>
+      <content type="html" xml:base="http://localhost:4000/posts/2017-01-02-my-example-post/">&lt;p&gt;Eos eu docendi tractatos sapientem, brute option menandri in vix, quando vivendo accommodare te ius. Nec melius fastidii constituam id, viderer theophrastus ad sit, hinc semper periculis cum id. Noluisse postulant assentior est in, no choro sadipscing repudiandae vix. Vis in euismod delenit dignissim. Ex quod nostrum sit, suas decore animal id ius, nobis solet detracto quo te.&lt;/p&gt;
+
+&lt;p&gt;No laudem altera adolescens has, volumus lucilius eum no. Eam ei nulla audiam efficiantur. Suas affert per no, ei tale nibh sea. Sea ne magna harum, in denique scriptorem sea, cetero alienum tibique ei eos. Labores persequeris referrentur eos ei.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Deden Fathurahman</name>
+          
+          
+        </author>
+      
+
+      
+
+      
+
+      
+        <summary type="html">Eos eu docendi tractatos sapientem, brute option menandri in vix, quando vivendo accommodare te ius. Nec melius fastidii constituam id, viderer theophrastus ad sit, hinc semper periculis cum id. Noluisse postulant assentior est in, no choro sadipscing repudiandae vix. Vis in euismod delenit dignissim. Ex quod nostrum sit, suas decore animal id ius, nobis solet detracto quo te. No laudem altera adolescens has, volumus lucilius eum no. Eam ei nulla audiam efficiantur. Suas affert per no, ei tale nibh sea. Sea ne magna harum, in denique scriptorem sea, cetero alienum tibique ei eos. Labores persequeris referrentur eos ei.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+</feed>
