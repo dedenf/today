@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>http://localhost:4000/posts/2017-01-02-my-example-post/</loc>
-<lastmod>2017-01-02T00:00:00-07:00</lastmod>
-</url>
-<url>
-<loc>http://localhost:4000/posts/2017-01-03-super-long-article/</loc>
-<lastmod>2017-01-03T00:00:00-07:00</lastmod>
-</url>
-<url>
-<loc>http://localhost:4000/posts/2017-01-04-this-post-demonstrates-post-content-styles/</loc>
-<lastmod>2017-01-04T00:00:00-07:00</lastmod>
-</url>
-<url>
-<loc>http://localhost:4000/posts/2017-01-05-welcome-to-jekyll/</loc>
-<lastmod>2017-01-05T00:00:00-07:00</lastmod>
-</url>
-<url>
 <loc>http://localhost:4000/posts/2018-10-16-today-i-did-and-learn/</loc>
 <lastmod>2018-10-16T10:35:47-07:00</lastmod>
 </url>
@@ -37,6 +21,14 @@
 <lastmod>2018-10-22T21:43:18-07:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/posts/2019-09-25-beli-udemy-docker-nodejs/</loc>
+<lastmod>2019-09-25T00:00:00-07:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/posts/2019-09-25-deden-ganteng/</loc>
+<lastmod>2019-09-25T00:00:00-07:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/about/</loc>
 </url>
 <url>
@@ -44,12 +36,6 @@
 </url>
 <url>
 <loc>http://localhost:4000/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/tags/lorem/</loc>
-</url>
-<url>
-<loc>http://localhost:4000/tags/ipsum/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/tags/hugo/</loc>
@@ -70,10 +56,10 @@
 <loc>http://localhost:4000/tags/ansible/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/categories/misc/</loc>
+<loc>http://localhost:4000/tags/nodejs/</loc>
 </url>
 <url>
-<loc>http://localhost:4000/categories/junk/</loc>
+<loc>http://localhost:4000/tags/docker/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/posts/2/</loc>
