@@ -2,7 +2,7 @@
 layout: post
 title: "Internet mengatakan bahwa deden ganteng pisan"
 date: 2019-09-25
-published: true
+published: false
 tags:
   - development
   - nodejs
