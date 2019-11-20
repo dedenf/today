@@ -9,7 +9,7 @@ tags:
   - seputarfinansial
 ---
 
-Posting artikel mengenai tujuan finansial, sebelumnya memang sudah pernah menulis mengenai bluepront finansial, yang mana hal itu mungkin tidak akan bisa sama satu orang dengan yang lain.
+Posting artikel mengenai [tujuan finansial](https://seputarfinansial.com/apa-saja-tujuan-finansial-dan-membuatnya/), sebelumnya memang sudah pernah menulis [mengenai blueprint finansial](https://seputarfinansial.com/check-up-finansial-sebelum-membuat-blueprint-tujuan-finansial/), yang mana hal itu mungkin tidak akan bisa sama satu orang dengan yang lain.
 
 Hal ini memang berangkat dari pengalaman diri sendiri, yang mungkin akan bisa berbeda dengan pengalaman orang lain.
 
