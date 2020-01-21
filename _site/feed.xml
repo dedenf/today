@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2019-09-25T05:52:44-07:00</updated>
+  <updated>2020-01-21T03:31:26-07:00</updated>
   <id>http://localhost:4000//</id>
 
   
@@ -28,15 +28,76 @@
   
     <entry>
       
-      <title type="html">Internet mengatakan bahwa deden ganteng pisan</title>
+      <title type="html">Today: 21 Januari, 2020</title>
       
       
-      <link href="http://localhost:4000/posts/2019-09-25-deden-ganteng/" rel="alternate" type="text/html" title="Internet mengatakan bahwa deden ganteng pisan" />
+      <link href="http://localhost:4000/posts/2020-01-21-today-logs/" rel="alternate" type="text/html" title="Today: 21 Januari, 2020" />
       
-      <published>2019-09-25T00:00:00-07:00</published>
-      <updated>2019-09-25T00:00:00-07:00</updated>
-      <id>http://localhost:4000/posts/deden-ganteng</id>
-      <content type="html" xml:base="http://localhost:4000/posts/2019-09-25-deden-ganteng/">&lt;p&gt;&lt;img src=&quot;https://notes.dedenf.com/public/avatar.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content>
+      <published>2020-01-21T00:00:00-07:00</published>
+      <updated>2020-01-21T00:00:00-07:00</updated>
+      <id>http://localhost:4000/posts/today-logs</id>
+      <content type="html" xml:base="http://localhost:4000/posts/2020-01-21-today-logs/">&lt;ul&gt;
+  &lt;li&gt;Publish artikel baru di &lt;a href=&quot;https://notes.dedenf.com/2020/01/distringit-librorum-multitudo&quot;&gt;notes.dedenf.com&lt;/a&gt;, mengenai terlalu banyak informasi malah menjadikan distraksi.&lt;/li&gt;
+  &lt;li&gt;Publish juga artikel di &lt;a href=&quot;https://seputarfinansial.com/investasi-jangka-pendek-apa-saja/&quot;&gt;seputarfinansial.com&lt;/a&gt;, mengenai investasi jangka pendek, apa saja yang bisa diinvestasikan dengan jangka waktu pendek.&lt;/li&gt;
+  &lt;li&gt;Cloning repo &lt;a href=&quot;https://effective-shell.com/&quot;&gt;effective-shell&lt;/a&gt; yang dibuat oleh Dave Kerr, Dave ini dulu pernah kerja bareng di Jenius membuat Jenius 2.0, dan akan melakukan PR kalo ada yang bisa dilakukan.&lt;/li&gt;
+  &lt;li&gt;Menemukan newsletter baru, &lt;a href=&quot;https://devweekly.substack.com/&quot;&gt;devweekly&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Deden Fathurahman</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="today" />
+      
+
+      
+        <category term="development" />
+      
+        <category term="writing" />
+      
+        <category term="seputarfinansial" />
+      
+        <category term="notes" />
+      
+        <category term="blogging" />
+      
+
+      
+        <summary type="html">Publish artikel baru di notes.dedenf.com, mengenai terlalu banyak informasi malah menjadikan distraksi. Publish juga artikel di seputarfinansial.com, mengenai investasi jangka pendek, apa saja yang bisa diinvestasikan dengan jangka waktu pendek. Cloning repo effective-shell yang dibuat oleh Dave Kerr, Dave ini dulu pernah kerja bareng di Jenius membuat Jenius 2.0, dan akan melakukan PR kalo ada yang bisa dilakukan. Menemukan newsletter baru, devweekly.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
+      <title type="html">Publish artikel di seputar finansial</title>
+      
+      
+      <link href="http://localhost:4000/posts/2019-11-20-publish-artikel/" rel="alternate" type="text/html" title="Publish artikel di seputar finansial" />
+      
+      <published>2019-11-20T00:00:00-07:00</published>
+      <updated>2019-11-20T00:00:00-07:00</updated>
+      <id>http://localhost:4000/posts/publish-artikel</id>
+      <content type="html" xml:base="http://localhost:4000/posts/2019-11-20-publish-artikel/">&lt;p&gt;Posting artikel mengenai &lt;a href=&quot;https://seputarfinansial.com/apa-saja-tujuan-finansial-dan-membuatnya/&quot;&gt;tujuan finansial&lt;/a&gt;, sebelumnya memang sudah pernah menulis &lt;a href=&quot;https://seputarfinansial.com/check-up-finansial-sebelum-membuat-blueprint-tujuan-finansial/&quot;&gt;mengenai blueprint finansial&lt;/a&gt;, yang mana hal itu mungkin tidak akan bisa sama satu orang dengan yang lain.&lt;/p&gt;
+
+&lt;p&gt;Hal ini memang berangkat dari pengalaman diri sendiri, yang mungkin akan bisa berbeda dengan pengalaman orang lain.&lt;/p&gt;
+
+&lt;p&gt;Kondisi hubungan kita dengan uang juga bisa berbeda, karena beda kondisi, beda lingkungan, yang mana itu semua bisa membuat kita berpikir yang berbeda terhadap uang.&lt;/p&gt;</content>
 
       
       
@@ -57,15 +118,13 @@
       
         <category term="development" />
       
-        <category term="nodejs" />
+        <category term="writing" />
       
-        <category term="docker" />
-      
-        <category term="computer" />
+        <category term="seputarfinansial" />
       
 
       
-        <summary type="html"></summary>
+        <summary type="html">Posting artikel mengenai tujuan finansial, sebelumnya memang sudah pernah menulis mengenai blueprint finansial, yang mana hal itu mungkin tidak akan bisa sama satu orang dengan yang lain. Hal ini memang berangkat dari pengalaman diri sendiri, yang mungkin akan bisa berbeda dengan pengalaman orang lain. Kondisi hubungan kita dengan uang juga bisa berbeda, karena beda kondisi, beda lingkungan, yang mana itu semua bisa membuat kita berpikir yang berbeda terhadap uang.</summary>
       
 
       
