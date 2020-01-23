@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2020-01-21T03:31:26-07:00</updated>
+  <updated>2020-01-23T05:45:43-07:00</updated>
   <id>http://localhost:4000//</id>
 
   
@@ -28,6 +28,64 @@
   
     <entry>
       
+      <title type="html">Today: 23 Januari, 2020</title>
+      
+      
+      <link href="http://localhost:4000/posts/2020-01-23-20190123-today-logs/" rel="alternate" type="text/html" title="Today: 23 Januari, 2020" />
+      
+      <published>2020-01-23T00:00:00-07:00</published>
+      <updated>2020-01-23T00:00:00-07:00</updated>
+      <id>http://localhost:4000/posts/20190123-today-logs</id>
+      <content type="html" xml:base="http://localhost:4000/posts/2020-01-23-20190123-today-logs/">&lt;p&gt;Hari ini agak lebih sepi, tidak banyak yang dipublish selain artikel baru di blog, dan juga republish artikel yang ada di seputar finansial&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://notes.dedenf.com/2020/01/weekly-found&quot;&gt;Weekly Found&lt;/a&gt;, sepertinya akan mencoba mendisiplinkan diri dengan menulis ini, dan juga beberapa artikel yang bisa saya publikasikan di &lt;a href=&quot;https://jakartadev.org&quot;&gt;jakartadev&lt;/a&gt; atau &lt;a href=&quot;https://jenius.tech&quot;&gt;jenius.tech&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Menemukan substack baru, &lt;a href=&quot;https://sarahbessey.substack.com/&quot;&gt;Sarah Bessey&lt;/a&gt;, seperti substack sebelumnya, ini mengenai jurnalisme, gak tau sekarang lagi senang baca artikel atau publikasi dari jurnalis.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Penulisan mengenai &lt;a href=&quot;https://github.com/dedenf/terraform&quot;&gt;Terraform&lt;/a&gt; masih tersendat, harus dimulai lagi lebih sering.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Deden Fathurahman</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="today" />
+      
+
+      
+        <category term="development" />
+      
+        <category term="writing" />
+      
+        <category term="seputarfinansial" />
+      
+        <category term="notes" />
+      
+        <category term="blogging" />
+      
+
+      
+        <summary type="html">Hari ini agak lebih sepi, tidak banyak yang dipublish selain artikel baru di blog, dan juga republish artikel yang ada di seputar finansial Weekly Found, sepertinya akan mencoba mendisiplinkan diri dengan menulis ini, dan juga beberapa artikel yang bisa saya publikasikan di jakartadev atau jenius.tech. Menemukan substack baru, Sarah Bessey, seperti substack sebelumnya, ini mengenai jurnalisme, gak tau sekarang lagi senang baca artikel atau publikasi dari jurnalis. Penulisan mengenai Terraform masih tersendat, harus dimulai lagi lebih sering.</summary>
+      
+
+      
+      
+    </entry>
+  
+  
+  
+    <entry>
+      
       <title type="html">Today: 21 Januari, 2020</title>
       
       
@@ -40,7 +98,7 @@
   &lt;li&gt;Publish artikel baru di &lt;a href=&quot;https://notes.dedenf.com/2020/01/distringit-librorum-multitudo&quot;&gt;notes.dedenf.com&lt;/a&gt;, mengenai terlalu banyak informasi malah menjadikan distraksi.&lt;/li&gt;
   &lt;li&gt;Publish juga artikel di &lt;a href=&quot;https://seputarfinansial.com/investasi-jangka-pendek-apa-saja/&quot;&gt;seputarfinansial.com&lt;/a&gt;, mengenai investasi jangka pendek, apa saja yang bisa diinvestasikan dengan jangka waktu pendek.&lt;/li&gt;
   &lt;li&gt;Cloning repo &lt;a href=&quot;https://effective-shell.com/&quot;&gt;effective-shell&lt;/a&gt; yang dibuat oleh Dave Kerr, Dave ini dulu pernah kerja bareng di Jenius membuat Jenius 2.0, dan akan melakukan PR kalo ada yang bisa dilakukan.&lt;/li&gt;
-  &lt;li&gt;Menemukan newsletter baru, &lt;a href=&quot;https://devweekly.substack.com/&quot;&gt;devweekly&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Menemukan newsletter baru, &lt;a href=&quot;https://devweekly.substack.com/&quot;&gt;devweekly&lt;/a&gt; dan juga tentang jurnalisme di &lt;a href=&quot;https://themargins.substack.com/&quot;&gt;themargins&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;</content>
 
       
@@ -74,7 +132,7 @@
       
 
       
-        <summary type="html">Publish artikel baru di notes.dedenf.com, mengenai terlalu banyak informasi malah menjadikan distraksi. Publish juga artikel di seputarfinansial.com, mengenai investasi jangka pendek, apa saja yang bisa diinvestasikan dengan jangka waktu pendek. Cloning repo effective-shell yang dibuat oleh Dave Kerr, Dave ini dulu pernah kerja bareng di Jenius membuat Jenius 2.0, dan akan melakukan PR kalo ada yang bisa dilakukan. Menemukan newsletter baru, devweekly.</summary>
+        <summary type="html">Publish artikel baru di notes.dedenf.com, mengenai terlalu banyak informasi malah menjadikan distraksi. Publish juga artikel di seputarfinansial.com, mengenai investasi jangka pendek, apa saja yang bisa diinvestasikan dengan jangka waktu pendek. Cloning repo effective-shell yang dibuat oleh Dave Kerr, Dave ini dulu pernah kerja bareng di Jenius membuat Jenius 2.0, dan akan melakukan PR kalo ada yang bisa dilakukan. Menemukan newsletter baru, devweekly dan juga tentang jurnalisme di themargins.</summary>
       
 
       
