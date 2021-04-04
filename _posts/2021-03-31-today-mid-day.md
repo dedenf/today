@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Today: 32 Maret, 2021, midday record"
+title: "Today: 31 Maret, 2021, midday record"
 date: 2021-03-31
 published: true
 tags:
