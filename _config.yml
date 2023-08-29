@@ -36,7 +36,8 @@ twitter_username: dedenf
 twitter_image:
 facebook_app_id:
 facebook_image:
-google_analytics: UA-38299976-4
+# google_analytics: UA-38299976-4
+google_analytics:
 comments: false
 
 # Plugins
