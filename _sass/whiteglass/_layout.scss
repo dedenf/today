@@ -152,7 +152,6 @@
   letter-spacing: -1px;
   line-height: 1;
   font-weight: bold;
-  text-transform: uppercase;
 
   @include media-query($on-laptop) {
     font-size: 36px;
@@ -201,7 +200,7 @@
  * Pagination
  */
 .pagination {
-  padding: $spacing-unit / 2 0;
+  padding: calc($spacing-unit / 2);
   border-top: 1px solid $grey-color-light;
   border-bottom: 1px solid $grey-color-light;
   text-align: center;
