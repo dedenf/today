@@ -55,6 +55,7 @@ $ gita add <folder-name>
 ```
 
 or you want to add all or the folder in one particular folder
+
 ```bash
 $ gita add -a <folder-name>
 ```
@@ -92,3 +93,15 @@ repo26  main       []      add more text for test (1 year, 3 months ago)
 ```
 
 We can have a fresh pulled repo using one command, or do some git command within one command, like `gita pull` or `gita push`
+
+But of course, we could still using the old way by using good old `find`.
+
+```bash
+find . -name .git -print -execdir git pull --rebase \;
+```
+
+Or you could always add it to your `.bashrc` or `.zshrc`
+
+```bash
+alias gitupdate='find . -name .git -print -execdir git pull --rebase \;'
+```
