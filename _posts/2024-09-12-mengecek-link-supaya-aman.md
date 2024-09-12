@@ -19,9 +19,8 @@ Untuk menghindari hal-hal seperti serangan-serangan, tentunya dengan bijak memah
 
 Untuk mengecek tautan apakah berbahaya atau tidak, ada cara untuk melakukan pengecekan, berikut layanan yang terpercaya yang bisa digunakan untuk melakukan pengecekan. 
 
-- [BitDefender TrafficLight]( https://trafficlight.bitdefender.com/info/)
-Cara menggunakanny, selain bisa dengan langsung ke webstenya dan memasukkan tautan URL yang akan dicek, bisa juga dengan menuliskan langsung dengan cara ini misalkan, https://trafficlight.bitdefender.com/info/?url=http://campstrategwer.com.
-Dari pengecekan tersebut, BitDefender TrafficLight akan memberikan peringatan apakah tautan URL tersebut aman atau tidak untuk dikunjungi.
+- [BitDefender TrafficLight]( https://trafficlight.bitdefender.com/info/)   
+Cara menggunakanny, selain bisa dengan langsung ke webstenya dan memasukkan tautan URL yang akan dicek, bisa juga dengan menuliskan langsung dengan cara ini misalkan, [https://trafficlight.bitdefender.com/info/?url=http://campstrategwer.com](https://trafficlight.bitdefender.com/info/?url=http://campstrategwer.com). Dari pengecekan tersebut, BitDefender TrafficLight akan memberikan peringatan apakah tautan URL tersebut aman atau tidak untuk dikunjungi.
 - [CRDF](https://threatcenter.crdf.fr/check.html)
 - [FortiGuard](https://www.fortiguard.com/webfilter) by Fortinet
 - [OpenPhish](https://www.openphish.com/)
